@@ -12,7 +12,16 @@ struct ContentView: View {
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 20
     
-    let tipPercentages = [10, 15, 20, 25, 0]
+    private let tipPercentages = [10, 15, 20, 25, 0]
+    
+    private var totalPerPerson: Double {
+        let peopleCount = Double(numberOfPeople + 2)
+        let tipSelection = Double(tipPercentage)
+        let tipvalue = checkAmount * (tipSelection / 100)
+        let grandTotal = checkAmount + tipvalue
+        let amountPerPerson = grandTotal / peopleCount
+        return amountPerPerson
+    }
     
     var body: some View {
         NavigationView {
@@ -42,7 +51,7 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Text(checkAmount, format: .currency(code: Locale.current.identifier))
+                    Text(totalPerPerson, format: .currency(code: Locale.current.identifier))
                 }
                 
             }
