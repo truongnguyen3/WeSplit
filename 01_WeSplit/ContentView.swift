@@ -8,26 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    let students = ["Harry", "Hermione", "Ron"]
-    @State private var name: String = ""
-    @State private var selectedStudent: String? = "Harry"
+    @State private var checkAmount = 0.0
+    @State private var numberOfPeople = 2
+    @State private var tipPercentage = 20
+    
+    let tipPercentages = [10, 15, 20, 25, 0]
     
     var body: some View {
-        NavigationView {
-            Form {
-                TextField("Enter your name", text: $name)
-                    .background(.pink)
-                    .padding()
-                    .background(.purple)
-                
-                Picker("Select a student", selection: $selectedStudent) {
-                    ForEach(students, id: \.self) {
-                        Text($0)
-                    }
-                }
-            }
-        }
         
+        Form {
+            Section {
+                TextField(value: $checkAmount, format: .currency(code: Locale.current.identifier), label: {
+                    Text("Amount")
+                })
+                .keyboardType(.decimalPad)
+            }
+            
+            Section {
+                Text(checkAmount, format: .currency(code: Locale.current.identifier))
+            }
+            
+        }
     }
 }
 
