@@ -8,31 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    let students = ["Harry", "Hermione", "Ron"]
+    @State private var name: String = ""
+    @State private var selectedStudent: String? = "Harry"
+    
     var body: some View {
-        Form {
-            Text("Hello, world")
-            
-            Group {
-                Text("Hello, world")
-            }
-            
-            Section {
+        NavigationView {
+            Form {
+                TextField("Enter your name", text: $name)
+                    .background(.pink)
+                    .padding()
+                    .background(.purple)
                 
-                Text("Hello, world")
-                Text("Hello, world")
-                Text("Hello, world")
-                Text("Hello, world")
-                Text("Hello, world")
-                Text("Hello, world")
-                Text("Hello, world")
-                Text("Hello, world")
-                Text("Hello, world")
-                Text("Hello, world")
-                Text("Hello, world")
-                Text("Hello, world")
+                Picker("Select a student", selection: $selectedStudent) {
+                    ForEach(students, id: \.self) {
+                        Text($0)
+                    }
+                }
             }
         }
-        
         
     }
 }
